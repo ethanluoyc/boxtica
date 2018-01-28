@@ -21,6 +21,15 @@ impl Maze {
         }
     }
 
+    fn get_box(&mut self, x: i32, y: i32) -> Option<Block> {
+        if self.is_in_maze(x, y) {
+            let idx = x * self.height + y;
+            Some(self.data[idx as usize].clone())
+        } else {
+            None
+        }
+    }
+
     fn set_box(&mut self, x: i32, y: i32, block: Block) {
         if !self.is_in_maze(x, y) {
             return
