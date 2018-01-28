@@ -20,6 +20,9 @@ impl Maze {
     }
 
     fn set_box(&mut self, width: i32, height: i32, block: Block) {
+        if !self.is_in_maze(width, height) {
+            return
+        }
         let idx = width * self.height + height;
         self.data[idx as usize] = block;
     }
