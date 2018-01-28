@@ -4,6 +4,7 @@ pub struct Maze {
     width: i32,
     height: i32,
     data: Vec<Block>,
+    player_location: Option<(i32, i32)>,
 }
 
 impl Maze {
@@ -15,7 +16,8 @@ impl Maze {
         Maze {
             width,
             height,
-            data
+            data,
+            player_location: None,
         }
     }
 
@@ -24,6 +26,12 @@ impl Maze {
             return
         }
         let idx = width * self.height + height;
+        match &block {
+            &Block::Player => {
+                self.player_location = Some((width, height))
+            },
+            _ => {},
+        }
         self.data[idx as usize] = block;
     }
 
