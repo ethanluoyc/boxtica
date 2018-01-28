@@ -21,22 +21,22 @@ impl Maze {
         }
     }
 
-    fn set_box(&mut self, width: i32, height: i32, block: Block) {
-        if !self.is_in_maze(width, height) {
+    fn set_box(&mut self, x: i32, y: i32, block: Block) {
+        if !self.is_in_maze(x, y) {
             return
         }
-        let idx = width * self.height + height;
+        let idx = x * self.height + y;
         match &block {
             &Block::Player => {
-                self.player_location = Some((width, height))
+                self.player_location = Some((x, y))
             },
             _ => {},
         }
         self.data[idx as usize] = block;
     }
 
-    fn is_in_maze(&self, width: i32, height: i32) -> bool {
-        width >= 0 && width < self.width
-            && height >= 0 && height < self.height
+    fn is_in_maze(&self, x: i32, y: i32) -> bool {
+        x >= 0 && x < self.width
+            && y >= 0 && y < self.height
     }
 }
