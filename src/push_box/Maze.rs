@@ -18,4 +18,9 @@ impl Maze {
             data
         }
     }
+
+    fn set_box(&mut self, width: u32, height: u32, block: Block) {
+        let idx = width * self.height + height;
+        self.data[idx as usize] = block;
+    }
 }
