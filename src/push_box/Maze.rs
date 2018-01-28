@@ -26,6 +26,30 @@ impl Maze {
         }
     }
 
+    pub fn new_from_config_string(config: &Vec<&str>) -> Maze {
+        let height = config.len() as i32;
+        if height == 0 {
+            panic!();
+        }
+        let width = config[0].len() as i32;
+        let mut maze = Maze::new(width, height);
+        for (i, line) in config.iter().enumerate() {
+            if line.len() as i32 != width {
+                panic!();
+            }
+            for (j, ch) in line.char_indices() {
+                match ch {
+                    '#' => maze.set_box(i as i32, j as i32, Block::Wall),
+                    '.' => maze.set_box(i as i32, j as i32, Block::Boxtica),
+                    '@' => maze.set_box(i as i32, j as i32, Block::Player),
+                    '!' => maze.set_box(i as i32, j as i32, Block::Player),
+                    _ => panic!(),
+                }
+            }
+        }
+        maze
+    }
+
     pub fn add_target(&mut self, x: i32, y: i32) -> Option<()> {
         if self.is_in_maze(x, y) && self.targets.insert((x, y)) {
             Some(())
