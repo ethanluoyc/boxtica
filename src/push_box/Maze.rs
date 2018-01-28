@@ -1,11 +1,14 @@
 use super::Block::Block;
 use super::Direction::Direction;
 
+use std::collections::HashSet;
+
 pub struct Maze {
     width: i32,
     height: i32,
     data: Vec<Block>,
     player_location: Option<(i32, i32)>,
+    targets: HashSet<(i32, i32)>,
 }
 
 impl Maze {
@@ -19,6 +22,15 @@ impl Maze {
             height,
             data,
             player_location: None,
+            targets: HashSet::new(),
+        }
+    }
+
+    pub fn add_target(&mut self, x: i32, y: i32) -> Option<()> {
+        if self.is_in_maze(x, y) && self.targets.insert((x, y)) {
+            Some(())
+        } else {
+            None
         }
     }
 
