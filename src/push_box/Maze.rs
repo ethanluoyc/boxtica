@@ -23,4 +23,9 @@ impl Maze {
         let idx = width * self.height + height;
         self.data[idx as usize] = block;
     }
+
+    fn is_in_maze(&self, width: u32, height: u32) -> bool {
+        width >= 0 && width < self.width
+            && height >= 0 && height < self.height
+    }
 }
