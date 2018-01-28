@@ -1,6 +1,6 @@
 [package]
 name = "boxtica"
 version = "0.1.0"
-authors = ["ethanluoyc <ethanluoyc@gmail.com>"]
+authors = ["ethanluoyc <ethanluoyc@gmail.com>", "Fangyi Zhou <me@yuriko.moe>"]
 
 [dependencies]
