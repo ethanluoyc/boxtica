@@ -3,21 +3,19 @@ pub enum Block {
     Player,
     Wall,
     Boxtica,
-    // Whether target has a box or not
-    Target(bool),
 }
 
 impl Block {
     pub fn can_place_item(&self) -> bool {
         match *self {
-            Block::Empty | Block::Target(false) => true,
+            Block::Empty => true,
             _ => false,
         }
     }
 
-    pub fn can_move(&self) -> bool {
+    pub fn can_be_moved(&self) -> bool {
         match *self {
-            Block::Boxtica | Block::Target(true) => true,
+            Block::Boxtica => true,
             _ => false,
         }
     }
