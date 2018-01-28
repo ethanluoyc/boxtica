@@ -1,3 +1,4 @@
-pub mod Direction;
-pub mod Maze;
-pub mod Block;
+pub mod direction;
+pub mod maze;
+pub mod block;
+pub mod renderer;

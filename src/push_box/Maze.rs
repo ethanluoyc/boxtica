@@ -1,10 +1,10 @@
-use super::Block::Block;
+use super::block::Block;
 
 pub struct Maze {
-    width: i32,
-    height: i32,
-    data: Vec<Block>,
-    player_location: Option<(i32, i32)>,
+    pub width: i32,
+    pub height: i32,
+    pub data: Vec<Block>,
+    pub player_location: Option<(i32, i32)>,
 }
 
 impl Maze {
@@ -21,7 +21,7 @@ impl Maze {
         }
     }
 
-    fn set_box(&mut self, x: i32, y: i32, block: Block) {
+    pub fn set_box(&mut self, x: i32, y: i32, block: Block) {
         if !self.is_in_maze(x, y) {
             return
         }
@@ -35,8 +35,9 @@ impl Maze {
         self.data[idx as usize] = block;
     }
 
-    fn is_in_maze(&self, x: i32, y: i32) -> bool {
+    pub fn is_in_maze(&self, x: i32, y: i32) -> bool {
         x >= 0 && x < self.width
             && y >= 0 && y < self.height
     }
+
 }

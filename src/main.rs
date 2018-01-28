@@ -1,12 +1,13 @@
 extern crate sdl2;
 
-mod renderer;
+mod push_box;
 
+use push_box::block::Block;
 use sdl2::Sdl;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use std::time::Duration;
-use renderer::WorldRenderer;
+use push_box::renderer::WorldRenderer;
 
 
 pub fn main() {
@@ -37,7 +38,7 @@ pub fn main() {
                 },
                 _ => {}
             }
-            renderer.draw(x, y);
+            renderer.draw(&Block::Boxtica);
         }
         ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 60));
     }
