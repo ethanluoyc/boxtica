@@ -1,4 +1,5 @@
 use super::Block::Block;
+use super::Direction::Direction;
 
 pub struct Maze {
     width: i32,
@@ -47,5 +48,45 @@ impl Maze {
     fn is_in_maze(&self, x: i32, y: i32) -> bool {
         x >= 0 && x < self.width
             && y >= 0 && y < self.height
+    }
+
+    fn make_move(&mut self, dir: Direction) -> Option<()> {
+        match self.player_location {
+            None => None,
+            Some((x, y)) => {
+                let (next_x, next_y) = dir.next_step(x, y);
+                if let Some(ref next_box) = self.get_box(next_x, next_y) {
+                    match next_box {
+                        &Block::Empty => {
+                            self.set_box(x, y, Block::Empty);
+                            self.set_box(next_x, next_y, Block::Player);
+                            Some(())
+                        },
+                        &Block::Wall => {
+                            None
+                        },
+                        &Block::Boxtica => {
+                            let (next_next_x, next_next_y) = dir.next_step(x, y);
+                            if let Some(ref next_next_box) = self.get_box(next_next_x, next_next_y).clone() {
+                                match next_next_box {
+                                    &Block::Empty => {
+                                        self.set_box(x, y, Block::Empty);
+                                        self.set_box(next_x, next_y, Block::Player);
+                                        self.set_box(next_next_x, next_next_y, Block::Boxtica);
+                                        Some(())
+                                    }
+                                    _ => None,
+                                }
+                            } else {
+                                None
+                            }
+                        },
+                        &Block::Player => panic!(),
+                    }
+                } else {
+                    None
+                }
+            }
+        }
     }
 }
